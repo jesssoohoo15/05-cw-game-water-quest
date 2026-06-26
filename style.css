@@ -1,143 +1,319 @@
-/* Charity: water Brand Colors & Fonts
+/* ============================================================
+   Water Quest — charity: water
+   Palette derived from the charity: water Brand Usage Guide:
+   Jerry Can yellow is the hero; deep navy ("on black looks great").
+   ============================================================ */
 
-Primary Colors:
-- Yellow:     #FFC907
-- Blue:       #2E9DF7
-
-Secondary Colors:
-- Light Blue: #8BD1CB
-- Green:      #4FCB53
-- Orange:     #FF902A
-- Red:        #F5402C
-- Dark Green: #159A48
-- Pink:       #F16061
-
-Fonts:
-- Proxima Nova
-- Avenir
-
-*/
-
-* {
-  box-sizing: border-box;
+:root {
+  --yellow: #FFC907;   /* signature Jerry Can yellow */
+  --ink:    #14223A;   /* deep navy */
+  --blue:   #2E9DF7;   /* clean water */
+  --teal:   #8BD1CB;
+  --white:  #FFFFFF;
+  --red:    #F5402C;   /* dirty water / miss only */
+  --shadow: 0 18px 40px rgba(10, 20, 40, .35);
 }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
 
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 30px;
-  background-color: #f0f0f0;
-  color: #333;
+  font-family: "Poppins", system-ui, -apple-system, Segoe UI, sans-serif;
+  color: var(--white);
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(46,157,247,.20), transparent 60%),
+    radial-gradient(900px 500px at 0% 110%, rgba(139,209,203,.16), transparent 55%),
+    var(--ink);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: clamp(16px, 3vw, 40px);
 }
 
+/* ---------- Container / hero ---------- */
 .container {
-  max-width: 750px;
-  margin: 50px auto;
-  background-color: #fff;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 720px;
+  text-align: center;
+}
+
+/* brand wordmark above the title (added by script) */
+.brandbar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.brandbar svg { width: 24px; height: 28px; }
+.brandbar .wordmark {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  letter-spacing: .5px;
 }
 
 h1 {
-  text-align: center;
-  font-size: 30px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
+  font-size: clamp(42px, 11vw, 76px);
+  line-height: .95;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -1.5px;
 }
-
-h1 img {
-  height: 50px;
-  margin-right: 15px;
-  display: block;
-}
+h1 .drip { color: var(--yellow); }
 
 .game-instructions {
-  font-size: 18px;
-  margin-bottom: 30px;
-  text-align: center;
+  font-size: clamp(15px, 2.4vw, 18px);
+  color: rgba(255,255,255,.78);
+  font-weight: 300;
+  margin: 14px auto 28px;
+  max-width: 40ch;
 }
 
+/* ---------- Stats ---------- */
 .stats {
   display: flex;
-  justify-content: space-around;
-  margin-bottom: 30px;
-  background-color: #f5f5f5;
-  padding: 15px 0;
-  border-radius: 8px;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
 }
-
 .stats p {
+  flex: 1 1 150px;
   margin: 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: #333;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,.6);
+  font-weight: 600;
+  text-align: left;
 }
-
-.game-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 15px;
-  margin: 0 auto;
-  max-width: 500px;
+.stats span {
+  display: block;
+  margin-top: 4px;
+  font-size: clamp(28px, 6vw, 36px);
+  font-weight: 700;
+  letter-spacing: 0;
 }
+#current-cans { color: var(--yellow); }
+#timer { color: var(--white); }
 
-.grid-cell {
-  background-color: #e8e8e8;
-  border-radius: 8px;
-  aspect-ratio: 1;
+/* draining water bar appended after .stats by the script */
+.timer-track {
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.12);
+  overflow: hidden;
+  margin-bottom: 18px;
+}
+.timer-fill {
+  height: 100%;
+  width: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--blue), var(--teal));
+  transition: width 1s linear;
+}
+.timer-fill.low { background: linear-gradient(90deg, var(--red), #ff8a5c); }
+
+/* ---------- Achievement / milestone banner ---------- */
+.achievement {
+  min-height: 30px;
+  margin-bottom: 18px;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
+}
+.achievement .badge {
+  background: var(--yellow);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 18px;
+  border-radius: 99px;
+  box-shadow: 0 8px 20px rgba(255,201,7,.35);
+  animation: pop .35s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes pop {
+  from { transform: scale(.7); opacity: 0; }
+  to   { transform: scale(1);  opacity: 1; }
+}
+
+/* ---------- Game grid ---------- */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(10px, 2.4vw, 18px);
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 22px;
+  padding: clamp(12px, 2.6vw, 22px);
+  margin-bottom: 26px;
+}
+.hole {
   position: relative;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  background: radial-gradient(120% 90% at 50% 18%, rgba(255,255,255,.06), rgba(255,255,255,.015));
+  border: 1px solid rgba(255,255,255,.06);
   overflow: hidden;
 }
-
-.water-can-wrapper {
+.hole::after {
+  content: "";
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  height: 70px;
-  /* Ensure the wrapper is properly centered */
-}
-
-.water-can {
-  width: 100%;
-  height: 100%;
-  background-image: url('img/water-can.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  cursor: pointer;
+  left: 50%; bottom: 12%;
+  transform: translateX(-50%);
+  width: 56%; height: 14%;
   border-radius: 50%;
-  animation: popUp 0.5s cubic-bezier(0.17, 0.67, 0.34, 2);
-  transform-origin: center; /* Ensure scaling happens from the center */
+  background: rgba(46,157,247,.10);
+  filter: blur(2px);
 }
 
-@keyframes popUp {
-  0% {
-    transform: scale(0.5); /* Start scaling from the center */
-  }
-  100% {
-    transform: scale(1); /* End scaling at full size */
-  }
-}
-
-
-button {
-  background-color: #4CAF50;
-  color: white;
+.can-btn {
+  position: absolute;
+  inset: 12% 16%;
   border: none;
-  padding: 12px 24px;
-  font-size: 16px;
-  border-radius: 8px;
+  background: transparent;
+  padding: 0;
   cursor: pointer;
-  display: block;
-  margin: 30px auto 0;
-  transition: background-color 0.2s;
+  transform: translateY(115%) scale(.85);
+  opacity: 0;
+  transition: transform .18s cubic-bezier(.34,1.56,.64,1), opacity .18s;
+}
+.can-btn.up { transform: translateY(0) scale(1); opacity: 1; }
+.can-btn:focus-visible { outline: 3px solid var(--white); outline-offset: 4px; border-radius: 12px; }
+.can-btn svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 8px 12px rgba(0,0,0,.35)); }
+.can-btn:hover svg { transform: translateY(-3px); transition: transform .12s; }
+
+/* dirty-water can = the score-reducing obstacle */
+.can-btn.dirty .body  { fill: #6E5A3C; }
+.can-btn.dirty .panel { fill: #7C6743; }
+
+/* tap feedback */
+.burst {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: clamp(18px, 4vw, 26px);
+  pointer-events: none;
+  animation: floatUp .6s ease-out forwards;
+}
+.burst.plus  { color: var(--yellow); }
+.burst.minus { color: var(--red); }
+@keyframes floatUp {
+  0%   { transform: translateY(8px) scale(.7); opacity: 0; }
+  25%  { opacity: 1; }
+  100% { transform: translateY(-26px) scale(1.1); opacity: 0; }
+}
+
+/* ---------- Controls (Start + Reset) ---------- */
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+#start-game {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 17px;
+  border: none;
+  border-radius: 99px;
+  padding: 16px 40px;
+  cursor: pointer;
+  background: var(--yellow);
+  color: var(--ink);
+  box-shadow: 0 10px 24px rgba(255,201,7,.35);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+#start-game:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 16px 30px rgba(255,201,7,.45); }
+#start-game:active:not(:disabled) { transform: translateY(0); }
+#start-game:disabled { opacity: .55; cursor: default; }
+#start-game:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
+#reset-game {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 17px;
+  border: 2px solid rgba(255,255,255,.25);
+  border-radius: 99px;
+  padding: 14px 34px;
+  cursor: pointer;
+  background: transparent;
+  color: var(--white);
+  transition: border-color .12s ease, background .12s ease;
+}
+#reset-game:hover { border-color: var(--yellow); background: rgba(255,201,7,.08); }
+#reset-game:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
+/* ---------- End overlay (injected by script) ---------- */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,14,26,.78);
+  backdrop-filter: blur(6px);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s ease;
+  z-index: 20;
+}
+.overlay.show { opacity: 1; pointer-events: auto; }
+.overlay .card {
+  background: var(--white);
+  color: var(--ink);
+  border-radius: 26px;
+  max-width: 440px;
+  width: 100%;
+  padding: clamp(28px, 5vw, 44px);
+  text-align: center;
+  box-shadow: var(--shadow);
+  transform: translateY(14px) scale(.96);
+  transition: transform .25s ease;
+}
+.overlay.show .card { transform: translateY(0) scale(1); }
+.overlay .result-can { width: 64px; height: 76px; margin: 0 auto 14px; display: block; }
+.overlay h2 { margin: 0 0 6px; font-size: clamp(26px, 6vw, 34px); letter-spacing: -.5px; }
+.overlay .final {
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin: 0 0 14px;
+}
+.overlay .message { font-size: 17px; line-height: 1.5; color: #3a4658; margin: 0 0 26px; min-height: 2.6em; }
+.overlay .again {
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  border: none;
+  border-radius: 99px;
+  padding: 14px 34px;
+  cursor: pointer;
+  background: var(--yellow);
+  color: var(--ink);
+}
+.overlay .again:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+/* ---------- Confetti canvas (win celebration) ---------- */
+.confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 420px) {
+  .stats p { flex-basis: 100%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
 }
