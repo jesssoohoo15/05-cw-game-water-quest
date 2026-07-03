@@ -1,13 +1,7 @@
 /* ============================================================
    Water Quest — charity: water
-<<<<<<< HEAD
-   Palette derived from the charity: water Brand Book (2016):
-   Jerry Can yellow #FFC907 is the hero; blue #2E9DF7 = water;
-   secondary teal, green, and red from the brand's secondary set.
-=======
    Palette derived from the charity: water Brand Usage Guide:
    Jerry Can yellow is the hero; deep navy ("on black looks great").
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
    ============================================================ */
 
 :root {
@@ -15,14 +9,8 @@
   --ink:    #14223A;   /* deep navy */
   --blue:   #2E9DF7;   /* clean water */
   --teal:   #8BD1CB;
-<<<<<<< HEAD
-  --green:  #4FCB53;   /* dirty / polluted can */
-  --white:  #FFFFFF;
-  --red:    #F5402C;   /* miss feedback only */
-=======
   --white:  #FFFFFF;
   --red:    #F5402C;   /* dirty water / miss only */
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   --shadow: 0 18px 40px rgba(10, 20, 40, .35);
 }
 
@@ -30,13 +18,7 @@
 html, body { margin: 0; padding: 0; }
 
 body {
-<<<<<<< HEAD
-  /* Montserrat ~ Proxima Nova (brand primary); Avenir is the brand's own
-     fallback, per the charity: water Brand Book typography page */
-  font-family: "Montserrat", "Proxima Nova", "Avenir", system-ui, -apple-system, Segoe UI, sans-serif;
-=======
   font-family: "Poppins", system-ui, -apple-system, Segoe UI, sans-serif;
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   color: var(--white);
   background:
     radial-gradient(1200px 600px at 80% -10%, rgba(46,157,247,.20), transparent 60%),
@@ -64,16 +46,9 @@ body {
 }
 .brandbar svg { width: 24px; height: 28px; }
 .brandbar .wordmark {
-<<<<<<< HEAD
-  /* Brand book: wordmark is Baskerville regular at 140 tracking */
-  font-family: "Libre Baskerville", Baskerville, Georgia, serif;
-  font-size: 17px;
-  letter-spacing: .14em;
-=======
   font-family: Georgia, "Times New Roman", serif;
   font-size: 19px;
   letter-spacing: .5px;
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
 }
 
 h1 {
@@ -89,58 +64,10 @@ h1 .drip { color: var(--yellow); }
   font-size: clamp(15px, 2.4vw, 18px);
   color: rgba(255,255,255,.78);
   font-weight: 300;
-<<<<<<< HEAD
-  margin: 14px auto 18px;
-  max-width: 46ch;
-}
-
-/* ---------- Difficulty picker (injected by script) ---------- */
-.difficulty {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 22px;
-}
-.diff-btn {
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 15px;
-  color: var(--white);
-  background: rgba(255,255,255,.05);
-  border: 2px solid rgba(255,255,255,.18);
-  border-radius: 16px;
-  padding: 10px 20px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  transition: border-color .12s ease, background .12s ease, transform .12s ease;
-}
-.diff-btn small {
-  font-weight: 400;
-  font-size: 11px;
-  letter-spacing: .5px;
-  color: rgba(255,255,255,.55);
-}
-.diff-btn:hover { border-color: rgba(255,255,255,.4); transform: translateY(-1px); }
-.diff-btn.active {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--ink);
-  box-shadow: 0 8px 20px rgba(255,201,7,.3);
-}
-.diff-btn.active small { color: rgba(20,34,58,.7); }
-.diff-btn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
-.difficulty.locked .diff-btn { opacity: .45; cursor: default; pointer-events: none; }
-
-=======
   margin: 14px auto 28px;
   max-width: 40ch;
 }
 
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
 /* ---------- Stats ---------- */
 .stats {
   display: flex;
@@ -258,21 +185,9 @@ h1 .drip { color: var(--yellow); }
 .can-btn svg { width: 100%; height: 100%; display: block; filter: drop-shadow(0 8px 12px rgba(0,0,0,.35)); }
 .can-btn:hover svg { transform: translateY(-3px); transition: transform .12s; }
 
-<<<<<<< HEAD
-/* dirty-water can = the score-reducing obstacle
-   (green fill + drips + ✕ badge come from its own SVG artwork,
-   plus a slow wobble as an extra motion cue) */
-.can-btn.dirty.up svg { animation: wobble 1s ease-in-out infinite; }
-@keyframes wobble {
-  0%, 100% { transform: rotate(-2.5deg); }
-  50%      { transform: rotate(2.5deg); }
-}
-.can-btn.dirty:hover svg { transform: none; }
-=======
 /* dirty-water can = the score-reducing obstacle */
 .can-btn.dirty .body  { fill: #6E5A3C; }
 .can-btn.dirty .panel { fill: #7C6743; }
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
 
 /* tap feedback */
 .burst {
@@ -395,57 +310,6 @@ h1 .drip { color: var(--yellow); }
   z-index: 50;
 }
 
-<<<<<<< HEAD
-/* ---------- Footer ---------- */
-.site-footer {
-  margin-top: 42px;
-  padding-top: 26px;
-  border-top: 1px solid rgba(255,255,255,.10);
-}
-.footer-mission {
-  font-size: 13.5px;
-  font-weight: 300;
-  line-height: 1.6;
-  color: rgba(255,255,255,.55);
-  max-width: 52ch;
-  margin: 0 auto 16px;
-}
-.footer-links {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-}
-.footer-links a {
-  color: var(--white);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 9px 20px;
-  border: 1.5px solid rgba(255,255,255,.25);
-  border-radius: 99px;
-  transition: border-color .12s ease, background .12s ease;
-}
-.footer-links a:hover { border-color: var(--blue); background: rgba(46,157,247,.10); }
-.footer-links a.donate {
-  background: var(--yellow);
-  border-color: var(--yellow);
-  color: var(--ink);
-  box-shadow: 0 6px 16px rgba(255,201,7,.25);
-}
-.footer-links a.donate:hover { background: #ffd63e; border-color: #ffd63e; }
-.footer-links a:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
-
-/* ---------- Responsive ---------- */
-@media (max-width: 420px) {
-  .stats p { flex-basis: 100%; }
-  .diff-btn { flex: 1 1 100%; }
-}
-@media (prefers-reduced-motion: reduce) {
-  * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
-}                          
-=======
 /* ---------- Responsive ---------- */
 @media (max-width: 420px) {
   .stats p { flex-basis: 100%; }
@@ -453,4 +317,3 @@ h1 .drip { color: var(--yellow); }
 @media (prefers-reduced-motion: reduce) {
   * { transition-duration: .001ms !important; animation-duration: .001ms !important; }
 }
->>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
