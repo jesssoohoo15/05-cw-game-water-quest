@@ -1,11 +1,16 @@
 /* ============================================================
    Water Quest — charity: water
+<<<<<<< HEAD
    Tap the yellow jerry cans before they vanish. Reach the goal to win.
+=======
+   Tap the yellow jerry cans before they vanish. Hit 20 to win.
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
    Dirty-water cans are the obstacle (they cost you points).
    ============================================================ */
 (() => {
   "use strict";
 
+<<<<<<< HEAD
   // ----- Sound effects (10 pts) -----
   // MP3s downloaded from Pixabay/Freesound and uploaded to the Codespace.
   // Keep these three files in the SAME folder as index.html.
@@ -80,6 +85,16 @@
   let difficulty = DIFFICULTIES.normal;
 
   const GRID_CELLS = 9; // 3 x 3
+=======
+  // ----- Config -----
+  const GAME_SECONDS  = 30;
+  const WIN_THRESHOLD = 20;
+  const GRID_CELLS    = 9;     // 3 x 3
+  const SPAWN_MS      = 720;   // how often a can appears
+  const CAN_LIFE_MIN  = 850;   // can stays up (ms)
+  const CAN_LIFE_MAX  = 1300;
+  const DIRTY_CHANCE  = 0.18;  // chance of a score-reducing dirty can
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
 
   // ----- Feedback banks (hopeful tone, never guilt — per brand) -----
   const WIN_MESSAGES = [
@@ -96,6 +111,7 @@
     "Almost there — clean water is within reach. Try again.",
     "Don't stop now — the next round is yours."
   ];
+<<<<<<< HEAD
   const pick = arr => arr[Math.floor(Math.random() * arr.length)];
 
   // ----- Milestones (10 pts) -----
@@ -113,6 +129,17 @@
 
   // ----- Jerry can artwork -----
   // Clean can: signature yellow.
+=======
+  const MILESTONES = {
+    5:  "Nice start — 5 cans!",
+    10: "Halfway to the well! 💛",
+    15: "Almost there — 15!",
+    20: "Goal reached! Keep collecting!"
+  };
+  const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+
+  // ----- Jerry can artwork (used for cans, brand mark, and overlay) -----
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   const CAN_SVG = `
     <svg viewBox="0 0 100 116" aria-hidden="true">
       <path class="body" fill="#FFC907"
@@ -124,6 +151,7 @@
         stroke-linecap="round" opacity=".55" fill="none"/>
     </svg>`;
 
+<<<<<<< HEAD
   // Dirty can: murky green PLUS non-color cues (wavy contamination drips
   // and a bold "avoid" badge) so it reads clearly for colorblind players.
   const DIRTY_CAN_SVG = `
@@ -145,6 +173,8 @@
       </g>
     </svg>`;
 
+=======
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   // ----- Grab the existing elements -----
   const container  = document.querySelector(".container");
   const grid       = document.querySelector(".game-grid");
@@ -154,7 +184,10 @@
   const resetBtn   = document.getElementById("reset-game");
   const achieveEl  = document.getElementById("achievements");
   const statsEl    = document.querySelector(".stats");
+<<<<<<< HEAD
   const instrEl    = document.querySelector(".game-instructions");
+=======
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
 
   // ----- Brand header above the title -----
   const h1 = container.querySelector("h1");
@@ -164,6 +197,7 @@
   container.insertBefore(brand, h1);
   h1.innerHTML = 'Water<span class="drip">Quest</span>';
 
+<<<<<<< HEAD
   // ----- Difficulty picker (injected after the instructions) -----
   const diffBar = document.createElement("div");
   diffBar.className = "difficulty";
@@ -201,6 +235,8 @@
   }
   updateInstructions();
 
+=======
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   // ----- Timer water bar (after .stats) -----
   const timerTrack = document.createElement("div");
   timerTrack.className = "timer-track";
@@ -235,7 +271,11 @@
 
   // ----- State -----
   let score = 0;
+<<<<<<< HEAD
   let timeLeft = difficulty.seconds;
+=======
+  let timeLeft = GAME_SECONDS;
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   let running = false;
   let countdownId = null;
   let spawnId = null;
@@ -245,6 +285,7 @@
     const prev = score;
     score = Math.max(0, n);            // never below zero
     scoreEl.textContent = score;
+<<<<<<< HEAD
     // Milestone check: loop the array; conditional fires each message once.
     if (score > prev) {
       for (const m of milestones) {
@@ -253,6 +294,11 @@
           showAchievement(m.text);
         }
       }
+=======
+    if (score > prev && MILESTONES[score] && !shownMilestones[score]) {
+      shownMilestones[score] = true;
+      showAchievement(MILESTONES[score]);
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     }
   }
 
@@ -262,7 +308,11 @@
 
   function updateTimer() {
     timeEl.textContent = timeLeft;
+<<<<<<< HEAD
     timerFill.style.width = (timeLeft / difficulty.seconds) * 100 + "%";
+=======
+    timerFill.style.width = (timeLeft / GAME_SECONDS) * 100 + "%";
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     timerFill.classList.toggle("low", timeLeft <= 8);
   }
 
@@ -283,11 +333,16 @@
     const empty = holes.filter(h => !h.querySelector(".can-btn"));
     if (!empty.length) return;
     const hole = empty[Math.floor(Math.random() * empty.length)];
+<<<<<<< HEAD
     const dirty = Math.random() < difficulty.dirtyChance;   // the obstacle
+=======
+    const dirty = Math.random() < DIRTY_CHANCE;   // the obstacle
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
 
     const btn = document.createElement("button");
     btn.className = "can-btn" + (dirty ? " dirty" : "");
     btn.setAttribute("aria-label", dirty ? "Dirty water — avoid" : "Clean water can — tap");
+<<<<<<< HEAD
     btn.innerHTML = dirty ? DIRTY_CAN_SVG : CAN_SVG;
 
     let resolved = false;
@@ -297,6 +352,16 @@
     const removeCan = () => {
       btn.classList.remove("up");
       setTimeout(() => btn.remove(), 180);   // element leaves the DOM
+=======
+    btn.innerHTML = CAN_SVG;
+
+    let resolved = false;
+    const life = CAN_LIFE_MIN + Math.random() * (CAN_LIFE_MAX - CAN_LIFE_MIN);
+
+    const removeCan = () => {
+      btn.classList.remove("up");
+      setTimeout(() => btn.remove(), 180);
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     };
 
     const expire = setTimeout(() => {
@@ -304,7 +369,10 @@
       resolved = true;
       if (!dirty) {                    // missing a clean can costs a point
         flash(hole, "\u22121", "minus");
+<<<<<<< HEAD
         missSound();                   // SFX: missed a clean can
+=======
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
         setScore(score - 1);
       }
       removeCan();
@@ -317,6 +385,7 @@
       if (dirty) {                     // OBSTACLE: tapping dirty water costs 2 points
         setScore(score - 2);
         flash(hole, "\u22122", "minus");
+<<<<<<< HEAD
         dirtySound();                  // SFX: tapped a dirty can
       } else {
         setScore(score + 1);
@@ -327,26 +396,49 @@
     });
 
     hole.appendChild(btn);             // element added to the DOM
+=======
+      } else {
+        setScore(score + 1);
+        flash(hole, "+1", "plus");
+      }
+      removeCan();
+    });
+
+    hole.appendChild(btn);
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     requestAnimationFrame(() => btn.classList.add("up"));
   }
 
   function startGame() {
     if (running) return;
     running = true;
+<<<<<<< HEAD
     playSfx("start");                  // SFX: game-start mp3 on button click
+=======
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     score = 0;
     scoreEl.textContent = "0";
     shownMilestones = {};
     achieveEl.innerHTML = "";
+<<<<<<< HEAD
     timeLeft = difficulty.seconds;
+=======
+    timeLeft = GAME_SECONDS;
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     updateTimer();
     overlay.classList.remove("show");
     startBtn.disabled = true;
     startBtn.textContent = "Collecting…";
+<<<<<<< HEAD
     diffBar.classList.add("locked");
 
     spawnCan();
     spawnId = setInterval(spawnCan, difficulty.spawnMs);
+=======
+
+    spawnCan();
+    spawnId = setInterval(spawnCan, SPAWN_MS);
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     countdownId = setInterval(() => {
       timeLeft--;
       updateTimer();
@@ -365,11 +457,18 @@
     scoreEl.textContent = "0";
     shownMilestones = {};
     achieveEl.innerHTML = "";
+<<<<<<< HEAD
     timeLeft = difficulty.seconds;
     updateTimer();
     startBtn.disabled = false;
     startBtn.textContent = "Start Game";
     diffBar.classList.remove("locked");
+=======
+    timeLeft = GAME_SECONDS;
+    updateTimer();
+    startBtn.disabled = false;
+    startBtn.textContent = "Start Game";
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
   }
 
   function endGame() {
@@ -377,6 +476,7 @@
     clearInterval(countdownId);
     clearInterval(spawnId);
     clearBoard();
+<<<<<<< HEAD
     diffBar.classList.remove("locked");
 
     const won = score >= difficulty.winThreshold;
@@ -384,6 +484,12 @@
     ovTitle.textContent = won ? "You filled the well!" : "Time's up!";
     ovFinal.textContent = "You collected " + score + " can" + (score === 1 ? "" : "s") +
       " on " + difficulty.label;
+=======
+
+    const won = score >= WIN_THRESHOLD;
+    ovTitle.textContent = won ? "You filled the well!" : "Time's up!";
+    ovFinal.textContent = "You collected " + score + " can" + (score === 1 ? "" : "s");
+>>>>>>> 5e5f848544b63def303812f7ac92dd94f915f7e4
     ovMsg.textContent   = won ? pick(WIN_MESSAGES) : pick(LOSE_MESSAGES);
     overlay.classList.add("show");
     if (won) launchConfetti();         // celebrate the win
